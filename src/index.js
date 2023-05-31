@@ -3,7 +3,7 @@ import dbg from "debug";
 import config from "./config";
 import express from "express";
 import cors from "cors";
-
+import pool from "./dbconn/db";
 const debug = dbg("http");
 const PORT = config.PORT;
 const HOST_NAME = config.HOST_NAME;
@@ -25,4 +25,5 @@ server.listen(PORT, HOST_NAME, () => {
   debug(`✨✨ Server running at http://${HOST_NAME}:${PORT}:`);
 });
 
+pool.query("show tables");
 export default server;
