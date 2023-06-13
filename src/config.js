@@ -7,4 +7,5 @@ module.exports = {
   DB_HOST: process.env.DB_HOST,
   DB_USER: process.env.DB_USER,
   DATABASE: process.env.DATABASE,
+  SECRET_KEY: process.env.SECRET_KEY,
 };

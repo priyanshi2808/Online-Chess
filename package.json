@@ -4,7 +4,7 @@
   "description": "an online chess playing arena ",
   "main": "index.js",
   "scripts": {
-    "start": "set DEBUG=http,database & nodemon --exec babel-node src/index.js",
+    "start": "set DEBUG=http,database,api:*,service:*,data:*,controller:* & nodemon --exec babel-node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Priyanshi",
