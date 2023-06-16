@@ -7,7 +7,6 @@ import loginAPI from "../api/loginAPI";
 function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [error, setError] = useState("");
 	const navigate = useNavigate();
 
 	async function handleSubmit(e) {
@@ -64,11 +63,7 @@ function Login() {
 				<button className="submit" align="center" type="submit">
 					Login
 				</button>
-				{error && (
-					<div className="text-white lg:text-black w-full text-center pt-[10px]">
-						{error}
-					</div>
-				)}
+
 				<br></br>
 				<p fontFamily="sans-serif" align="center">
 					Don't have an account yet!
