@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import "./login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import loginAPI from "../api/loginAPI";
+import signupAPI from "../api/signupAPI";
+import "./signup.css";
 
-function Login() {
+function Signup() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [error, setError] = useState("");
+	const [name, setName] = useState("");
 	const navigate = useNavigate();
 
 	async function handleSubmit(e) {
@@ -15,7 +15,7 @@ function Login() {
 		const regExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 		if (regExp.test(email)) {
 			if (password.length >= 8) {
-				await loginAPI({ email, password })
+				await signupAPI({ name, email, password })
 					.then((response) => {
 						if (response.success) {
 							toast.success(response.message);
@@ -38,9 +38,19 @@ function Login() {
 	return (
 		<div className="main">
 			<p className="sign" align="center">
-				LOGIN
+				SIGNUP
 			</p>
 			<form className="form1" onSubmit={handleSubmit}>
+				<input
+					className="un "
+					type="text"
+					align="center"
+					placeholder="Name"
+					name="name"
+					required={"true"}
+					value={name}
+					onChange={(e) => setName(e.target.value)}
+				/>
 				<input
 					className="un "
 					type="text"
@@ -62,23 +72,19 @@ function Login() {
 					onChange={(e) => setPassword(e.target.value)}
 				/>
 				<button className="submit" align="center" type="submit">
-					Login
+					Signup
 				</button>
-				{error && (
-					<div className="text-white lg:text-black w-full text-center pt-[10px]">
-						{error}
-					</div>
-				)}
+
 				<br></br>
 				<p fontFamily="sans-serif" align="center">
-					Don't have an account yet!
+					Already have an account
 				</p>
-				<Link to="/signup" className="signup" align="center">
-					Create new Account
+				<Link to="/login" className="login" align="center">
+					Login here
 				</Link>
 			</form>
 		</div>
 	);
 }
 
-export default Login;
+export default Signup;

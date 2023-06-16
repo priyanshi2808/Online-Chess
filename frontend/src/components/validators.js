@@ -1,14 +1,15 @@
-const Validators = ({ email, password }) => {
-	var error = "";
-	// const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-	// if (!email || regex.test(email) === false) {
-	// 	error = "Email is not valid";
-	// }
-	// console.log(password);
-	// // if (password.length < 8) {
-	// // 	error = [...error] + "Password mush be 8 characher long";
-	// // }
-	return error;
-};
+function validators({ email, password }) {
+	if (!email) {
+		return "Email is required";
+	} else if (!new RegExp(/\S+@\S+\.\S+/).test(email)) {
+		return "Incorrect email format";
+	}
+	if (!password) {
+		return "Password is required";
+	} else if (password.length < 8) {
+		return "Password must have a minimum 8 characters";
+	}
+	return "";
+}
 
-export default Validators;
+export default validators;
