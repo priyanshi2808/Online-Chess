@@ -1,0 +1,5 @@
+{
+    "baseUrl":"http://localhost:8000/api",
+    "login":"/login",
+    "signup":"/signup"
+}
