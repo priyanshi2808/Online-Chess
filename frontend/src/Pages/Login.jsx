@@ -4,27 +4,32 @@ import { Link, useNavigate } from "react-router-dom";
 import validators from "../components/validators";
 import { useLogin } from "../Hooks/useLogin";
 import { toast } from "react-hot-toast";
+import loginAPI from "../api/loginAPI";
 
 function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
-	const { login, errors } = useLogin();
+	// const { login, errors } = useLogin();
 	const navigate = useNavigate();
 
 	async function handleSubmit(e) {
 		e.preventDefault();
 		setError(validators(email, password));
 		if (error.length === 0) {
-			await login(email, password).then((res) => {
-				console.log("res", res);
-				//if (res.success)
-				console.log(errors);
-				toast.success("user logged in"); //navigate("/arena");
-				//else alert(res.message);
-			});
+			await loginAPI({ email, password })
+				.then((response) => {
+					if (response.success) {
+						toast.success(response.message);
+						navigate("/arena");
+					} else {
+						toast.error(response.message);
+					}
+				})
+				.catch((error) => {
+					toast.error(error.message);
+				});
 		}
-		console.log(error);
 	}
 
 	return (
@@ -56,9 +61,9 @@ function Login() {
 				<button className="submit" align="center" type="submit">
 					Login
 				</button>
-				{errors && (
+				{error && (
 					<div className="text-white lg:text-black w-full text-center pt-[10px]">
-						{errors}
+						{error}
 					</div>
 				)}
 				<br></br>
